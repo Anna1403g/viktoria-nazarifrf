@@ -121,7 +121,7 @@ section.slide-focus-active {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: visible;
     padding: 0 15px;
 }
 .envelope-container {
@@ -320,7 +320,7 @@ section.slide-focus-active {
     z-index: 2;
 }
 .envelope-screen.open-step-3 .env-letter {
-    transform: translateY(-150px);
+    transform: translateY(-260px);
     z-index: 6;
 }
 .envelope-screen.open-step-4 {
@@ -1212,23 +1212,13 @@ section.slide-focus-active .silk-swatch:nth-child(5) { transition-delay: 0.55s; 
     }
 }
 /* ПРИМУСОВЕ СКИДАННЯ ДЛЯ ТЕЛЕФОНІВ */
-@media screen and (max-width: 1024px) {
-    .premium-submit-button {
-        transform: none !important;
-        transition: none !important;
-        pointer-events: auto !important;
-        position: static !important;
-        box-shadow: none !important; /* Щоб не було візуальних глюків */
+@media screen and (max-width: 600px) {
+    .envelope-container {
+        width: min(330px, 92vw);
+        margin: 0 auto;
+        transform: none;
     }
 }
-@media screen and (max-width: 600px) {
-    /* Зменшуємо конверт, щоб він точно влізав */
-    .envelope-container {
-        transform: scale(0.85); /* Зменшуємо до 85% від розміру */
-        transform-origin: top center; /* Масштабуємо від верхнього краю */
-        width: 100%;
-        margin-top: 10px;
-    }
 
     /* Додатково зменшуємо відступи у формі */
     .luxury-form-inputs {
@@ -1236,7 +1226,7 @@ section.slide-focus-active .silk-swatch:nth-child(5) { transition-delay: 0.55s; 
         margin: 0 auto;
         padding: 15px;
     }
-}@media (max-width: 480px){
+@media (max-width: 480px){
 
     .envelope-container{
         width:92vw;
