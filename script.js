@@ -555,39 +555,27 @@
     // ==========================================================================
     // 9. АНКЕТА RSVP ТА ВАЛІДАЦІЯ (RSVP FORM TRANSLATION & MAILTO EXECUTOR)
     // ==========================================================================
-    function runRsvpFormSubsystem() {
-        if (!UI.rsvp.form) return;
+    document.getElementById('rsvp-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Запобігає перезавантаженню сторінки
 
-        addSafeEvent(UI.rsvp.form, "submit", function (e) {
-            e.preventDefault();
+    // Отримуємо значення імені
+    const guestNameValue = document.getElementById('guest-name').value;
 
-            const guestNameValue = UI.rsvp.nameField ? UI.rsvp.nameField.value.trim() : "";
-            const recipientMail = "Viktorialopatovska606@gmail.com";
+    // Отримуємо значення вибраної радіо-кнопки (yes або no)
+    const attendanceValue = document.querySelector('input[name="attendance"]:checked').value;
 
-            if (!guestNameValue) {
-                if (UI.rsvp.nameField) UI.rsvp.nameField.style.borderColor = "#ff4d4d";
-                alert("Будь ласка, вкажіть ваше ім'я.");
-                return;
-            }
+    // Перетворюємо значення на текст, який буде в листі
+    const attendanceText = (attendanceValue === "yes") 
+        ? "Я прийду з задоволенням" 
+        : "На жаль, не зможу прийти";
 
-            if (UI.rsvp.submitButton) {
-                UI.rsvp.submitButton.disabled = true;
-                UI.rsvp.submitButton.innerText = "ОБРОБКА...";
-            }
+    // Формуємо вміст листа
+    const mailSubject = encodeURIComponent("Відповідь на весільне запрошення 💍");
+    const mailBody = encodeURIComponent(`Привіт!\n\n${attendanceText} на весіллі Назара та Вікторії.\nМоє ім'я: ${guestNameValue}`);
 
-            const mailSubject = encodeURIComponent("Відповідь на весільне запрошення 💍");
-            const mailBody = encodeURIComponent(`Привіт! Я підтверджую свою присутність на весіллі Олега та Інни.\nМоє ім'я: ${guestNameValue}`);
-
-            setTimeout(() => {
-                window.location.href = `mailto:${recipientMail}?subject=${mailSubject}&body=${mailBody}`;
-                
-                if (UI.rsvp.submitButton) {
-                    UI.rsvp.submitButton.disabled = false;
-                    UI.rsvp.submitButton.innerText = "ВІДПРАВЛЕНО";
-                }
-            }, 600);
-        });
-    }
+    // Відкриваємо поштову програму користувача
+    window.location.href = `mailto:ВАША_ПОШТА@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+});
 
     // ==========================================================================
     // 10. ОПТИМІЗАЦІЯ ХОДУ СКРОЛУ ТА ПЕРЕЗАПУСК (SCROLL THROTTLER ENGINE)
