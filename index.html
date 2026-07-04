@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Олег та Інна | Весільне Запрошення</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+</head>
+<body class="lock-scroll">
+
+    <div class="luxury-bg-overlay"></div>
+
+    <div id="envelope-screen" class="envelope-screen">
+        <div class="envelope-perspective">
+            <div class="envelope-container" id="envelope-click-area">
+                <div class="envelope-3d">
+                    <div class="env-back"></div>
+                    <div class="env-inside">
+                        <div class="env-inside-pattern"></div>
+                    </div>
+                    <div class="env-letter">
+                        <div class="env-letter-content">
+                            <h4 class="env-mini-names">Oleg & Inna</h4>
+                            <div class="env-mini-divider"></div>
+                            <p class="env-mini-date">26.08.2026</p>
+                        </div>
+                    </div>
+                    <div class="env-left"></div>
+                    <div class="env-right"></div>
+                    <div class="env-front-pocket"></div>
+                    <div class="env-flap" id="envelope-flap"></div>
+                    <div class="wax-seal-wrapper">
+                        <div class="wax-seal-body">
+                            <span class="wax-seal-text">OI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seal-hint-container">
+            <p class="seal-hint-text">Натисніть для відкриття</p>
+            <div class="seal-hint-icon">✦</div>
+        </div>
+    </div>
+
+    <div id="main-content" class="main-content hidden">
+
+       <section class="hero-section">
+            <div class="stars-twinkle-layer"></div>
+    
+            <!-- Залиште тільки один контейнер -->
+            <div class="wedding-arch-container">
+                <div class="wedding-arch-frame" style="background-image: url('main-photo.jpg');"></div>
+            </div>
+    
+            <div class="hero-wrapper">
+                <p class="hero-top-tag">ВЕСІЛЬНЕ ЗАПРОШЕННЯ</p>
+                <h1 class="hero-names">Oleg & Inna</h1>
+                <div class="hero-decorative-line"><span>✦</span></div>
+                <h2 class="hero-save-date">Save The Date</h2>
+                
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <span id="days">00</span>
+                        <label>днів</label>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="hours">00</span>
+                        <label>год</label>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes">00</span>
+                        <label>хв</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-down-indicator">
+                <span class="scroll-line"></span>
+            </div>
+        </section>
+
+        <section class="calendar-section">
+            <h2 class="cursive-heading">Особлива дата</h2>
+            <p>Зітріть захисний шар на трьох картках, щоб побачити точну дату нашого свята:</p>
+            
+            <div class="scratch-blocks-row-container">
+                
+                <div class="scratch-module-card" id="scratch-card-day">
+                    <div class="scratch-under-text-layer">
+                        <span class="scratch-number-display">26</span>
+                        <label class="scratch-under-label">Число</label>
+                    </div>
+                    <canvas class="scratch-surface-canvas" id="canvas-scratch-day"></canvas>
+                </div>
+
+                <div class="scratch-module-card" id="scratch-card-month">
+                    <div class="scratch-under-text-layer">
+                        <span class="scratch-text-display">Серпня</span>
+                        <label class="scratch-under-label">Місяць</label>
+                    </div>
+                    <canvas class="scratch-surface-canvas" id="canvas-scratch-month"></canvas>
+                </div>
+
+                <div class="scratch-module-card" id="scratch-card-year">
+                    <div class="scratch-under-text-layer">
+                        <span class="scratch-number-display">2026</span>
+                        <label class="scratch-under-label">Рік</label>
+                    </div>
+                    <canvas class="scratch-surface-canvas" id="canvas-scratch-year"></canvas>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="wedding-timeline-section" id="timeline-section">
+            <div class="curtain-cloud cloud-left-wing"></div>
+            <div class="curtain-cloud cloud-right-wing"></div>
+
+            <div class="timeline-content-inner">
+                <h2 class="cursive-heading text-white">Таймінг дня</h2>
+                <p class="timeline-subtitle-decor">Хронологія нашого щастя</p>
+                
+                <div class="vertical-timeline-track">
+                    <div class="timeline-progress-bar" id="timeline-progress"></div>
+                    
+                    <div class="timeline-node-item">
+                        <div class="timeline-time-box">15:00</div>
+                        <div class="timeline-details-card">
+                            <h4>Збір гостей & Welcome</h4>
+                            <p>Легка музика, келих ігристого та перші затишні фотокартки.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-node-item">
+                        <div class="timeline-time-box">15:30</div>
+                        <div class="timeline-details-card">
+                            <h4>Урочиста церемонія</h4>
+                            <p>Найважливіша мить дня. Час щирих обітниць та обміну обручками.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-node-item">
+                        <div class="timeline-time-box">17:30</div>
+                        <div class="timeline-details-card">
+                            <h4>Весільна вечеря</h4>
+                            <p>Початок банкету, вишукані пригощення, затишна програма та тости.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-node-item">
+                        <div class="timeline-time-box">22:00</div>
+                        <div class="timeline-details-card">
+                            <h4>Весільний торт</h4>
+                            <p>Солодкий і яскравий кульмінаційний момент нашого вечора.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="wedding-location-section">
+            <h2 class="cursive-heading">Місце проведення</h2>
+            <h3 class="castle-title-display">CANTACUZINO CASTLE</h3>
+            <p class="castle-address-text">Bușteni, Румунія</p>
+            
+            <div class="castle-media-container">
+                <div class="castle-illustration-parallax" id="parallax-river-img" style="background-image: url('river.jpg');"></div>
+            </div>
+            
+            <a href="https://maps.google.com/?q=Cantacuzino+Castle+Busteni" target="_blank" class="luxury-action-button">
+                <span class="btn-text">ВІДКРИТИ НА МАПІ</span>
+            </a>
+        </section>
+
+        <section class="wedding-dresscode-section">
+            <h2 class="cursive-heading">Дрес-код</h2>
+            <p class="dresscode-luxury-tag">WEDDING CHIC</p>
+            <p class="dresscode-explanation">Ми будемо вдячні, якщо ви підтримаєте колірну палітру нашого свята:</p>
+            
+            <div class="silk-palette-flex">
+                <div class="silk-swatch color-olive-light"><div class="silk-sheen"></div></div>
+                <div class="silk-swatch color-olive-mid"><div class="silk-sheen"></div></div>
+                <div class="silk-swatch color-olive-deep"><div class="silk-sheen"></div></div>
+                <div class="silk-swatch color-olive-dark"><div class="silk-sheen"></div></div>
+                <div class="silk-swatch color-chocolate"><div class="silk-sheen"></div></div>
+            </div>
+        </section>
+
+        <section class="wedding-rsvp-section">
+            <div class="rsvp-form-card">
+                <h2 class="cursive-heading">Підтвердження</h2>
+                <p class="rsvp-mini-text">Будь ласка, заповніть форму нижче</p>
+                
+                <form id="rsvp-form" class="luxury-form-inputs">
+                    <div class="luxury-input-group">
+                        <label class="floating-field-label" for="guest-name">Ваше ім'я та прізвище</label>
+                        <input type="text" id="guest-name" class="custom-text-input" placeholder="Введіть ваше ім'я..." required>
+                        <span class="input-focus-line"></span>
+                    </div>
+
+                    <div class="form-choice-title">Чи зможете ви прийти?</div>
+                    
+                    <label class="premium-selection-label">
+                        <input type="radio" name="attendance" value="yes" class="hidden-native-radio" checked>
+                        <span class="custom-radio-circle"></span>
+                        <span class="selection-text-label">Я прийду з задоволенням </span>
+                    </label>
+
+                    <label class="premium-selection-label">
+                        <input type="radio" name="attendance" value="no" class="hidden-native-radio">
+                        <span class="custom-radio-circle"></span>
+                        <span class="selection-text-label">На жаль, не зможу </span>
+                    </label>
+
+                    <button type="submit" class="premium-submit-button">ПІДТВЕРДИТИ ВІДПОВІДЬ</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1175 @@
+
+
+/* ==========================================================================
+   1. ГЛОБАЛЬНІ НАЛАШТУВАННЯ ТА СКИДАННЯ СТИЛІВ (RESET & BASE)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #edebe2;
+    color: #2b231f;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body.lock-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* Глобальний преміальний фоновий градієнт */
+.luxury-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #f4f3ed 0%, #e1ded3 35%, #d4d0b9 65%, #c4bf9e 100%);
+    z-index: -10;
+    pointer-events: none;
+}
+
+/* ТИПОГРАФІКА ТА ЗАГОЛОВКИ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.cursive-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 2.8rem;
+    color: #4e573c;
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   2. СИСТЕМА ПОСЕКЦІЙНОГО КІНОФОКУСУ (CINEMATIC FOCUS SYSTEM)
+   ========================================================================== */
+section {
+    position: relative;
+    width: 100vw;
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 24px;
+    overflow: hidden;
+    
+    /* Ефект розмиття неактивних слайдів */
+    filter: blur(14px);
+    opacity: 0.2;
+    transform: scale(0.92) translateY(30px);
+    transition: filter 1.4s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 1.4s cubic-bezier(0.25, 1, 0.5, 1),
+                transform 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: filter, opacity, transform;
+}
+
+/* Активна секція в центрі екрану */
+section.slide-focus-active {
+    filter: blur(0px);
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+}
+
+
+/* ==========================================================================
+   3. ЕКРАН З 3D-КОНВЕРТОМ ТА СУРГУЧЕВИМ ЗАБОРОЛОМ (ENVELOPE SCREEN)
+   ========================================================================== */
+.envelope-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f2f1eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    transition: transform 1.5s cubic-bezier(0.76, 0, 0.24, 1), 
+                opacity 0.9s ease;
+}
+
+.envelope-perspective {
+    perspective: 1500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.envelope-container {
+    position: relative;
+    width: 330px;
+    height: 230px;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.envelope-container:hover {
+    transform: scale(1.04) rotateX(5deg);
+}
+
+.envelope-3d {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.env-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #61694f;
+    border-radius: 8px;
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.env-inside {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #555c45;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.env-inside-pattern {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 46%, #414735 47%, #414735 53%, transparent 54%) 0 0/14px 14px;
+    opacity: 0.22;
+}
+
+.env-left {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 165px solid rgba(110, 118, 89, 0.98);
+    border-top: 115px solid transparent;
+    border-bottom: 115px solid transparent;
+    z-index: 4;
+}
+
+.env-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-right: 165px solid rgba(105, 113, 84, 0.98);
+    border-top: 115px solid transparent;
+    border-bottom: 115px solid transparent;
+    right: 0;
+    z-index: 4;
+}
+
+.env-front-pocket {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 165px solid #798262;
+    border-right: 165px solid #798262;
+    border-bottom: 120px solid #6e7659;
+    border-top: 110px solid transparent;
+    bottom: 0;
+    z-index: 5;
+}
+
+.env-flap {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 165px solid transparent;
+    border-right: 165px solid transparent;
+    border-top: 115px solid #798262;
+    top: 0;
+    transform-origin: top;
+    z-index: 6;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s ease;
+}
+
+.env-letter {
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    width: 300px;
+    height: 210px;
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 3px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    z-index: 3;
+    transition: transform 0.9s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.3s ease;
+}
+
+.env-letter-content {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ebd19b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.env-mini-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-style: italic;
+    color: #4e573c;
+}
+
+.env-mini-divider {
+    width: 45px;
+    height: 1px;
+    background-color: #c59f52;
+    margin: 10px 0;
+}
+
+.env-mini-date {
+    font-size: 0.8rem;
+    color: #c59f52;
+    letter-spacing: 2px;
+}
+
+.wax-seal-wrapper {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    left: 130px;
+    top: 85px;
+    z-index: 7;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+.wax-seal-body {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(#ebd19b, #c59f52, #a37c36);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.wax-seal-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: white;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.seal-hint-container {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.seal-hint-text {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #798262;
+    font-weight: 300;
+}
+
+.seal-hint-icon {
+    font-size: 1rem;
+    color: #c59f52;
+    margin-top: 12px;
+    animation: hintBounce 2.2s infinite ease-in-out;
+}
+
+.envelope-screen.open-step-1 .wax-seal-wrapper {
+    transform: scale(0) rotate(60deg);
+    opacity: 0;
+}
+.envelope-screen.open-step-2 .env-flap {
+    transform: rotateX(180deg);
+    z-index: 2;
+}
+.envelope-screen.open-step-3 .env-letter {
+    transform: translateY(-150px);
+    z-index: 6;
+}
+.envelope-screen.open-step-4 {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* ==========================================================================
+   4. ГОЛОВНИЙ СЛАЙД (HERO BLOCK) ЗІ СВІТІННЯМ ТА ТАЙМЕРОМ
+   ========================================================================== */
+.hero-section {
+    min-height: 100vh;
+}
+
+.stars-twinkle-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, #ffffff 1px, transparent 0),
+        radial-gradient(circle, #ebd19b 1.5px, transparent 0);
+    background-size: 45px 45px, 65px 65px;
+    background-position: 0 0, 25px 25px;
+    opacity: 0.38;
+    animation: starsTwinkleMotion 7s infinite linear;
+    pointer-events: none;
+}
+
+.wedding-arch-container {
+    width: 300px; /* Або ваш розмір */
+    height: 400px;
+    border-radius: 150px 150px 0 0; /* Форма арки */
+    background-image: url('main-photo.jpg'); /* Ваше фото */
+    background-size: cover;
+    background-position: center top; /* Фокус на обличчя */
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+
+.wedding-arch-frame {
+    width: 100%;
+    height: 100%;
+    border-radius: 160px 160px 0 0;
+    
+    /* Додаємо ці властивості примусово */
+    background-size: cover !important;        
+    background-position: center top !important; /* Центруємо по горизонталі, підтягуємо до верху по вертикалі */
+    background-repeat: no-repeat !important;
+    
+    filter: brightness(0.92) contrast(1.03);
+}
+
+.hero-wrapper {
+    position: relative;
+    z-index: 4;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 35px 26px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    max-width: 290px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+}
+
+.hero-top-tag {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    color: #798262;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.hero-names {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #4e573c;
+    line-height: 1.1;
+}
+
+.hero-decorative-line {
+    margin: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-decorative-line::before, 
+.hero-decorative-line::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(197, 159, 82, 0.5));
+}
+.hero-decorative-line::after {
+    background: linear-gradient(to left, transparent, rgba(197, 159, 82, 0.5));
+}
+
+.hero-decorative-line span {
+    font-size: 0.65rem;
+    color: #c59f52;
+    margin: 0 10px;
+    animation: heartPulseAnimation 2.2s infinite ease-in-out;
+}
+
+.hero-save-date {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #2b231f;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(121, 130, 98, 0.18);
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 52px;
+}
+
+.countdown-item span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #4e573c;
+    line-height: 1;
+}
+
+.countdown-item label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: #7c756e;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.scroll-down-indicator {
+    position: absolute;
+    bottom: 25px;
+    z-index: 10;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, #798262 50%, transparent 50%) 0 0/100% 200%;
+    animation: scrollLineMove 2.5s infinite linear;
+    display: block;
+}
+
+
+/* ==========================================================================
+   5. ОСОБЛИВА ДАТА — ТРИ ЕЛЕГАНТНІ СКРЕТЧ-КВАДРАТИКИ (SCRATCH CARDS)
+   ========================================================================== */
+.calendar-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.calendar-section p {
+    font-size: 0.88rem;
+    color: #6e7659;
+    letter-spacing: 1px;
+    margin-bottom: 35px;
+    text-align: center;
+    max-width: 300px;
+}
+
+/* Флекс-контейнер для трьох карток в один ряд */
+.scratch-blocks-row-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+/* Окремий витончений квадратик картки */
+.scratch-module-card {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(78, 87, 60, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Шар під захисним покриттям (прихований текст) */
+.scratch-under-text-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fcfbfa;
+    z-index: 1;
+    text-align: center;
+    padding: 5px;
+}
+
+.scratch-number-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: #4e573c;
+    line-height: 1.1;
+}
+
+.scratch-text-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #4e573c;
+    line-height: 1.1;
+}
+
+.scratch-under-label {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #a39e93;
+    margin-top: 4px;
+}
+
+/* Робочий Canvas, який затирається користувачем */
+.scratch-surface-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    touch-action: none;
+    cursor: pointer;
+}
+
+
+/* ==========================================================================
+   6. ТАЙМІНГ ДНЯ З ЧІТКИМИ ВЕЛИКИМИ ХМАРАМИ-ЗАВІСАМИ
+   ========================================================================== */
+.wedding-timeline-section {
+    background-color: #4e573c;
+    border-radius: 28px;
+    width: 92vw;
+    max-width: 460px;
+    margin: 25px auto;
+    padding: 60px 24px;
+    position: relative;
+    box-shadow: 0 25px 55px rgba(43, 35, 31, 0.18);
+}
+
+.timeline-content-inner {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Хмари-завіси густі, видимі, з чіткими обрисами */
+.curtain-cloud {
+    position: absolute;
+    width: 92%;
+    height: 100%;
+    top: 0;
+    background: radial-gradient(circle, #ffffff 0%, #f8f7f2 60%, rgba(255,255,255,0.9) 80%, rgba(255,255,255,0) 100%);
+    z-index: 10;
+    pointer-events: none;
+    filter: blur(2px); /* Мінімізоване розмиття для чіткості меж хмар */
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    transition: transform 1.6s cubic-bezier(0.25, 1, 0.5, 1), 
+                opacity 1.3s ease-in-out;
+    will-change: transform, opacity;
+}
+
+.cloud-left-wing {
+    left: -20px;
+    transform-origin: left center;
+}
+
+.cloud-right-wing {
+    right: -20px;
+    transform-origin: right center;
+}
+
+/* Анімація розсування хмар при скролі */
+section.slide-focus-active .cloud-left-wing {
+    transform: translateX(-115%) scale(0.75);
+    opacity: 0;
+}
+section.slide-focus-active .cloud-right-wing {
+    transform: translateX(115%) scale(0.75);
+    opacity: 0;
+}
+
+.timeline-subtitle-decor {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: #f4f3ed;
+    text-transform: uppercase;
+    margin-top: 6px;
+    margin-bottom: 45px;
+    opacity: 0.75;
+    text-align: center;
+}
+
+.vertical-timeline-track {
+    position: relative;
+    max-width: 330px;
+    margin: 0 auto;
+}
+
+.vertical-timeline-track::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: rgba(255, 255, 255, 0.14);
+    top: 10px;
+    bottom: 10px;
+    left: 16px;
+}
+
+.timeline-progress-bar {
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, #ebd19b 0%, #c59f52 100%);
+    top: 10px;
+    left: 16px;
+    height: 0%;
+    transition: height 0.15s linear;
+    will-change: height;
+}
+
+.timeline-node-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 48px;
+    text-align: left;
+}
+
+.timeline-node-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-time-box {
+    position: absolute;
+    left: -15px;
+    top: -3px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ffffff;
+    z-index: 4;
+}
+
+.timeline-node-item::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 2px solid #4e573c;
+    border-radius: 50%;
+    left: 11px;
+    top: 6px;
+    z-index: 5;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.timeline-node-item.node-active::after {
+    background-color: #ebd19b;
+    border-color: #ffffff;
+    transform: scale(1.6);
+    box-shadow: 0 0 12px #ebd19b;
+}
+
+.timeline-details-card {
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.03);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.timeline-node-item.node-active .timeline-details-card {
+    background-color: rgba(255, 255, 255, 0.11);
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.timeline-details-card h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.timeline-details-card p {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: rgba(244, 243, 237, 0.78);
+    font-weight: 300;
+}
+
+
+/* ==========================================================================
+   7. МІСЦЕ ПРОВЕДЕННЯ ТА ЕФЕКТ ПАРАЛАКСУ (LOCATION)
+   ========================================================================== */
+.castle-title-display {
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    margin-top: 8px;
+    font-weight: 400;
+    text-align: center;
+    color: #2b231f;
+}
+
+.castle-address-text {
+    font-size: 0.85rem;
+    color: #6e7659;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.castle-media-container {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 30px;
+    padding: 6px;
+    background: #ffffff;
+    box-shadow: 0 12px 35px rgba(78, 87, 60, 0.07);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.castle-illustration-parallax {
+    width: 100%;
+    height: 195px;
+    border-radius: 5px;
+    background-position: center 20%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    will-change: background-position;
+}
+
+.luxury-action-button {
+    display: inline-block;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 13px 32px;
+    border: 1px solid #798262;
+    color: #4e573c;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 2.5px;
+    border-radius: 4px;
+    font-weight: 400;
+    background: transparent;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.luxury-action-button:hover {
+    background-color: #4e573c;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(78, 87, 60, 0.15);
+}
+
+
+/* ==========================================================================
+   8. НОВИЙ ВЕЛИКИЙ БЛОК: ГАЛЕРЕЯ «ДОРОГІ ГОСТІ» (ПЕРСОНИ)
+   ========================================================================== */
+.guests-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.guests-subtitle {
+    font-size: 0.85rem;
+    color: #798262;
+    margin-bottom: 35px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Сітка для фотографій гостей */
+.guests-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 330px;
+    margin: 0 auto;
+}
+
+/* Картка окремого гостя */
+.guest-photo-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 8px 24px rgba(78, 87, 60, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+    /* Ефект для плавної появи */
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1),
+                transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Почергове випливання фоток при активності екрану */
+section.slide-focus-active .guest-photo-card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+section.slide-focus-active .guest-photo-card:nth-child(1) { transition-delay: 0.1s; }
+section.slide-focus-active .guest-photo-card:nth-child(2) { transition-delay: 0.25s; }
+section.slide-focus-active .guest-photo-card:nth-child(3) { transition-delay: 0.4s; }
+section.slide-focus-active .guest-photo-card:nth-child(4) { transition-delay: 0.55s; }
+
+.guest-avatar-wrapper {
+    width: 100%;
+    height: 130px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background-color: #f4f3ed;
+}
+
+.guest-img-element {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.97);
+    transition: transform 0.5s ease;
+}
+
+.guest-photo-card:hover .guest-img-element {
+    transform: scale(1.06);
+}
+
+.guest-fullname-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #2b231f;
+    margin-bottom: 2px;
+}
+
+.guest-role-tag {
+    font-size: 0.65rem;
+    color: #938c82;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+/* ==========================================================================
+   9. ДРЕС-КОД ТА ШОВКОВІ ПАЛІТРИ (DRESSCODE)
+   ========================================================================== */
+.dresscode-luxury-tag {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    color: #798262;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    font-weight: 400;
+}
+
+.dresscode-explanation {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #55524c;
+    max-width: 280px;
+    margin: 0 auto 35px;
+    text-align: center;
+    font-weight: 300;
+}
+
+.silk-palette-flex {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.silk-swatch {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.14);
+    opacity: 0;
+    transform: translateY(30px) scale(0.75);
+    transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+section.slide-focus-active .silk-swatch {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+section.slide-focus-active .silk-swatch:nth-child(1) { transition-delay: 0.15s; }
+section.slide-focus-active .silk-swatch:nth-child(2) { transition-delay: 0.25s; }
+section.slide-focus-active .silk-swatch:nth-child(3) { transition-delay: 0.35s; }
+section.slide-focus-active .silk-swatch:nth-child(4) { transition-delay: 0.45s; }
+section.slide-focus-active .silk-swatch:nth-child(5) { transition-delay: 0.55s; }
+
+.silk-sheen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.38) 0%, transparent 55%);
+}
+
+.color-olive-light { background-color: #d8deb5; }
+.color-olive-mid   { background-color: #b2ba91; }
+.color-olive-deep  { background-color: #798262; }
+.color-olive-dark  { background-color: #4e573c; }
+.color-chocolate   { background-color: #2b231f; }
+
+
+/* ==========================================================================
+   10. ФОРМА ПІДТВЕРДЖЕННЯ ПРИСУТНОСТІ (RSVP FORM)
+   ========================================================================== */
+.wedding-rsvp-section {
+    padding-bottom: 100px;
+}
+
+.rsvp-form-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 40px 26px;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 18px 45px rgba(78, 87, 60, 0.06);
+}
+
+.rsvp-mini-text {
+    font-size: 0.78rem;
+    color: #727a5e;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.luxury-input-group {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.floating-field-label {
+    font-size: 0.68rem;
+    letter-spacing: 1.5px;
+    color: #4e573c;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.custom-text-input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid rgba(121, 130, 98, 0.32);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.55);
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    color: #2b231f;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.custom-text-input:focus {
+    border-color: #4e573c;
+    background: #ffffff;
+    box-shadow: 0 5px 15px rgba(78, 87, 60, 0.06);
+}
+
+.form-choice-title {
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #4e573c;
+    margin: 30px 0 14px;
+    font-weight: 500;
+}
+
+.premium-selection-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 14px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.premium-selection-label:hover {
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.hidden-native-radio {
+    display: none;
+}
+
+.custom-radio-circle {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #798262;
+    border-radius: 50%;
+    margin-right: 14px;
+    position: relative;
+    flex-shrink: 0;
+    background: #ffffff;
+}
+
+.custom-radio-circle::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(#ebd19b, #c59f52);
+    border-radius: 50%;
+    top: 4px;
+    left: 4px;
+    transform: scale(0);
+    transition: transform 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hidden-native-radio:checked ~ .custom-radio-circle::after {
+    transform: scale(1);
+}
+.hidden-native-radio:checked ~ .custom-radio-circle {
+    border-color: #4e573c;
+}
+
+.selection-text-label {
+    font-size: 0.88rem;
+    color: #3d3530;
+    font-weight: 300;
+}
+
+.premium-submit-button {
+    width: 100%;
+    padding: 16px;
+    background: #4e573c;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 7px 22px rgba(78, 87, 60, 0.2);
+    transition: all 0.3s ease;
+}
+
+.premium-submit-button:hover {
+    background: #3c432e;
+    box-shadow: 0 9px 28px rgba(78, 87, 60, 0.3);
+}
+
+
+/* ==========================================================================
+   11. КЛЮЧОВІ СИСТЕМНІ АНІМАЦІЇ (KEYFRAMES)
+   ========================================================================== */
+.main-content.hidden {
+    display: none;
+}
+
+@keyframes hintBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+@keyframes scrollLineMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 -80px; }
+}
+
+@keyframes starsTwinkleMotion {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.35; }
+    50% { opacity: 0.55; }
+    100% { transform: translateY(-12px) rotate(0.8deg); opacity: 0.35; }
+}
+
+@keyframes heartPulseAnimation {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; }
+}
+/* Фоновий акцент — фото розтягується під контентом */
+.bg-photo-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15; /* Дуже легкий ефект для атмосфери */
+    z-index: 0;
+}
+
+/* Елегантний контейнер для фото */
+.design-accent-img {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    margin: 40px auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
