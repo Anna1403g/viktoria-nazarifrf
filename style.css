@@ -23,8 +23,11 @@ html, body {
     overflow-x: hidden;
 }
 body.lock-scroll {
-    overflow: hidden; /* Тільки це залишаємо для блокування прокрутки */
+    overflow-y: auto; /* Дозволяємо прокрутку */
+    overflow-x: hidden; /* Забороняємо горизонтальний скрол (щоб не було білої полоси збоку) */
+    position: relative; /* Змінюємо з fixed на relative */
     width: 100%;
+    min-height: 100vh;
 }
 
 /* Глобальний преміальний фоновий градієнт */
@@ -1204,5 +1207,31 @@ section.slide-focus-active .silk-swatch:nth-child(5) { transition-delay: 0.55s; 
     .premium-submit-button {
         transform: none !important;
         transition: none !important;
+    }
+}
+/* ПРИМУСОВЕ СКИДАННЯ ДЛЯ ТЕЛЕФОНІВ */
+@media screen and (max-width: 1024px) {
+    .premium-submit-button {
+        transform: none !important;
+        transition: none !important;
+        pointer-events: auto !important;
+        position: static !important;
+        box-shadow: none !important; /* Щоб не було візуальних глюків */
+    }
+}
+@media screen and (max-width: 600px) {
+    /* Зменшуємо конверт, щоб він точно влізав */
+    .envelope-container {
+        transform: scale(0.85); /* Зменшуємо до 85% від розміру */
+        transform-origin: top center; /* Масштабуємо від верхнього краю */
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Додатково зменшуємо відступи у формі */
+    .luxury-form-inputs {
+        width: 95% !important;
+        margin: 0 auto;
+        padding: 15px;
     }
 }
