@@ -728,8 +728,8 @@
     // 13. ПОШИРЕНА ОБРОБКА ПОДІЙ (ADVANCED EVENT MANAGER)
     // ==========================================================================
     const EventManager = {
-        attachGlobalInteractions: function() {
-            // Додаємо ефект відхилення курсору для преміум-кнопок
+    attachGlobalInteractions: function() {
+        if (window.matchMedia("(pointer: fine)").matches) { // Додайте цю перевірку
             const buttons = document.querySelectorAll('.premium-submit-button');
             buttons.forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
@@ -743,4 +743,5 @@
                 });
             });
         }
-    };
+    }
+};

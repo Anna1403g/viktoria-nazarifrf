@@ -22,12 +22,10 @@ html, body {
     line-height: 1.6;
     overflow-x: hidden;
 }
-
+/* Додайте це в style.css, це надійніше для телефонів */
 body.lock-scroll {
     overflow: hidden;
-    position: fixed;
-    width: 100%;
-    height: 100%;
+    height: 100vh;
 }
 
 /* Глобальний преміальний фоновий градієнт */
@@ -1029,6 +1027,7 @@ section.slide-focus-active .silk-swatch:nth-child(5) { transition-delay: 0.55s; 
 }
 
 .custom-text-input:focus {
+    font-size: 16px;
     border-color: #4e573c;
     background: #ffffff;
     box-shadow: 0 5px 15px rgba(78, 87, 60, 0.06);
@@ -1172,4 +1171,23 @@ section.slide-focus-active .silk-swatch:nth-child(5) { transition-delay: 0.55s; 
     border-radius: 20px;
     margin: 40px auto;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+/* Адаптивність для смартфонів */
+@media screen and (max-width: 600px) {
+    /* Зменшуємо шрифти, щоб вони не вилізали за екран */
+    h1, h2, .env-mini-names {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Змушуємо картинки та контейнери не бути ширшими за екран */
+    .envelope-container, .luxury-form-inputs {
+        width: 90% !important;
+        margin: 0 auto;
+    }
+
+    /* Якщо є елементи, що мають фіксовану ширину (наприклад, 400px), 
+       тут їх треба скинути на auto або 100% */
+    .your-fixed-class-name {
+        width: 100% !important;
+    }
 }
