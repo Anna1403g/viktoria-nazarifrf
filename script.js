@@ -574,7 +574,7 @@
     const mailBody = encodeURIComponent(`Привіт!\n\n${attendanceText} на весіллі Назара та Вікторії.\nМоє ім'я: ${guestNameValue}`);
 
     // Відкриваємо поштову програму користувача
-    window.location.href = `mailto:ВАША_ПОШТА@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+    window.location.href = `mailto:Viktorialopatovska606@gmail.com?subject=${mailSubject}&body=${mailBody}`;
 });
 
     // ==========================================================================
@@ -716,21 +716,23 @@
     // 13. ПОШИРЕНА ОБРОБКА ПОДІЙ (ADVANCED EVENT MANAGER)
     // ==========================================================================
     const EventManager = {
-        attachGlobalInteractions: function() {
-            // Додаємо перевірку: код виконається, тільки якщо пристрій має "точну" мишу
-            if (window.matchMedia("(pointer: fine)").matches) {
-                const buttons = document.querySelectorAll('.premium-submit-button');
-                buttons.forEach(btn => {
-                    btn.addEventListener('mousemove', (e) => {
-                        const rect = btn.getBoundingClientRect();
-                        const x = e.clientX - rect.left - rect.width / 2;
-                        const y = e.clientY - rect.top - rect.height / 2;
-                        btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-                    });
-                    btn.addEventListener('mouseleave', () => {
-                        btn.style.transform = 'translate(0, 0)';
-                    });
+    attachGlobalInteractions: function() {
+        // Якщо це сенсорний пристрій, ми ВЗАГАЛІ не додаємо ці слухачі
+        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        
+        if (!isTouch) {
+            const buttons = document.querySelectorAll('.premium-submit-button');
+            buttons.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
                 });
-            }
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0)';
+                });
+            });
+        }
     }
-    };
+};

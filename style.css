@@ -22,10 +22,9 @@ html, body {
     line-height: 1.6;
     overflow-x: hidden;
 }
-/* Додайте це в style.css, це надійніше для телефонів */
 body.lock-scroll {
-    overflow: hidden;
-    height: 100vh;
+    overflow: hidden; /* Тільки це залишаємо для блокування прокрутки */
+    width: 100%;
 }
 
 /* Глобальний преміальний фоновий градієнт */
@@ -1199,5 +1198,11 @@ section.slide-focus-active .silk-swatch:nth-child(5) { transition-delay: 0.55s; 
     
     .premium-submit-button:active {
         transform: scale(0.95) !important; /* Замість руху буде легке натискання */
+    }
+}
+@media (pointer: coarse) {
+    .premium-submit-button {
+        transform: none !important;
+        transition: none !important;
     }
 }
