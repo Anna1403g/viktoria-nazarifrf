@@ -1191,3 +1191,13 @@ section.slide-focus-active .silk-swatch:nth-child(5) { transition-delay: 0.55s; 
         width: 100% !important;
     }
 }
+@media screen and (max-width: 768px) {
+    .premium-submit-button {
+        transform: none !important; /* Прибирає ефект "відхилення" на мобільних */
+        transition: transform 0.2s ease !important;
+    }
+    
+    .premium-submit-button:active {
+        transform: scale(0.95) !important; /* Замість руху буде легке натискання */
+    }
+}

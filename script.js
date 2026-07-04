@@ -728,20 +728,21 @@
     // 13. ПОШИРЕНА ОБРОБКА ПОДІЙ (ADVANCED EVENT MANAGER)
     // ==========================================================================
     const EventManager = {
-    attachGlobalInteractions: function() {
-        if (window.matchMedia("(pointer: fine)").matches) { // Додайте цю перевірку
-            const buttons = document.querySelectorAll('.premium-submit-button');
-            buttons.forEach(btn => {
-                btn.addEventListener('mousemove', (e) => {
-                    const rect = btn.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+        attachGlobalInteractions: function() {
+            // Додаємо перевірку: код виконається, тільки якщо пристрій має "точну" мишу
+            if (window.matchMedia("(pointer: fine)").matches) {
+                const buttons = document.querySelectorAll('.premium-submit-button');
+                buttons.forEach(btn => {
+                    btn.addEventListener('mousemove', (e) => {
+                        const rect = btn.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = 'translate(0, 0)';
+                    });
                 });
-                btn.addEventListener('mouseleave', () => {
-                    btn.style.transform = 'translate(0, 0)';
-                });
-            });
-        }
+            }
     }
-};
+    };
